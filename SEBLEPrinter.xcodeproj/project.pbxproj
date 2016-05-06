@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B944635A1CDC2DC200FE661F /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463511CDC2DC200FE661F /* SVIndefiniteAnimatedView.m */; };
+		B944635B1CDC2DC200FE661F /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463531CDC2DC200FE661F /* SVProgressAnimatedView.m */; };
+		B944635C1CDC2DC200FE661F /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B94463551CDC2DC200FE661F /* SVProgressHUD.bundle */; };
+		B944635D1CDC2DC200FE661F /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463571CDC2DC200FE661F /* SVProgressHUD.m */; };
+		B944635E1CDC2DC200FE661F /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463591CDC2DC200FE661F /* SVRadialGradientLayer.m */; };
+		B9499D3D1CDB200000542039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D3C1CDB200000542039 /* main.m */; };
+		B9499D401CDB200000542039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D3F1CDB200000542039 /* AppDelegate.m */; };
+		B9499D431CDB200000542039 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D421CDB200000542039 /* ViewController.m */; };
+		B9499D461CDB200000542039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9499D441CDB200000542039 /* Main.storyboard */; };
+		B9499D481CDB200000542039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9499D471CDB200000542039 /* Assets.xcassets */; };
+		B9499D4B1CDB200000542039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9499D491CDB200000542039 /* LaunchScreen.storyboard */; };
+		B9499D571CDB203500542039 /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D541CDB203500542039 /* HLPrinter.m */; };
+		B9499D581CDB203500542039 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D561CDB203500542039 /* UIImage+Bitmap.m */; };
+		B9499D5B1CDB207C00542039 /* SEPrinterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D5A1CDB207C00542039 /* SEPrinterManager.m */; };
+		B9499D5D1CDB20A600542039 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9499D5C1CDB20A600542039 /* CoreBluetooth.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B94463501CDC2DC200FE661F /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		B94463511CDC2DC200FE661F /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		B94463521CDC2DC200FE661F /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		B94463531CDC2DC200FE661F /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		B94463541CDC2DC200FE661F /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		B94463551CDC2DC200FE661F /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		B94463561CDC2DC200FE661F /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		B94463571CDC2DC200FE661F /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		B94463581CDC2DC200FE661F /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		B94463591CDC2DC200FE661F /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		B9499D381CDB1FFF00542039 /* SEBLEPrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SEBLEPrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9499D3C1CDB200000542039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B9499D3E1CDB200000542039 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B9499D3F1CDB200000542039 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B9499D411CDB200000542039 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B9499D421CDB200000542039 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B9499D451CDB200000542039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B9499D471CDB200000542039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9499D4A1CDB200000542039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9499D4C1CDB200000542039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9499D531CDB203500542039 /* HLPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLPrinter.h; sourceTree = "<group>"; };
+		B9499D541CDB203500542039 /* HLPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLPrinter.m; sourceTree = "<group>"; };
+		B9499D551CDB203500542039 /* UIImage+Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bitmap.h"; sourceTree = "<group>"; };
+		B9499D561CDB203500542039 /* UIImage+Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bitmap.m"; sourceTree = "<group>"; };
+		B9499D591CDB207C00542039 /* SEPrinterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPrinterManager.h; sourceTree = "<group>"; };
+		B9499D5A1CDB207C00542039 /* SEPrinterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPrinterManager.m; sourceTree = "<group>"; };
+		B9499D5C1CDB20A600542039 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B9499D5E1CDB246B00542039 /* SEBLEConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEBLEConst.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B9499D351CDB1FFF00542039 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9499D5D1CDB20A600542039 /* CoreBluetooth.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B944634F1CDC2DC200FE661F /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				B94463501CDC2DC200FE661F /* SVIndefiniteAnimatedView.h */,
+				B94463511CDC2DC200FE661F /* SVIndefiniteAnimatedView.m */,
+				B94463521CDC2DC200FE661F /* SVProgressAnimatedView.h */,
+				B94463531CDC2DC200FE661F /* SVProgressAnimatedView.m */,
+				B94463541CDC2DC200FE661F /* SVProgressHUD-Prefix.pch */,
+				B94463551CDC2DC200FE661F /* SVProgressHUD.bundle */,
+				B94463561CDC2DC200FE661F /* SVProgressHUD.h */,
+				B94463571CDC2DC200FE661F /* SVProgressHUD.m */,
+				B94463581CDC2DC200FE661F /* SVRadialGradientLayer.h */,
+				B94463591CDC2DC200FE661F /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		B9499D2F1CDB1FFF00542039 = {
+			isa = PBXGroup;
+			children = (
+				B9499D5C1CDB20A600542039 /* CoreBluetooth.framework */,
+				B9499D3A1CDB200000542039 /* SEBLEPrinter */,
+				B9499D391CDB1FFF00542039 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B9499D391CDB1FFF00542039 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9499D381CDB1FFF00542039 /* SEBLEPrinter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B9499D3A1CDB200000542039 /* SEBLEPrinter */ = {
+			isa = PBXGroup;
+			children = (
+				B944634F1CDC2DC200FE661F /* SVProgressHUD */,
+				B9499D521CDB201D00542039 /* BLEPrinter */,
+				B9499D3E1CDB200000542039 /* AppDelegate.h */,
+				B9499D3F1CDB200000542039 /* AppDelegate.m */,
+				B9499D411CDB200000542039 /* ViewController.h */,
+				B9499D421CDB200000542039 /* ViewController.m */,
+				B9499D441CDB200000542039 /* Main.storyboard */,
+				B9499D471CDB200000542039 /* Assets.xcassets */,
+				B9499D491CDB200000542039 /* LaunchScreen.storyboard */,
+				B9499D4C1CDB200000542039 /* Info.plist */,
+				B9499D3B1CDB200000542039 /* Supporting Files */,
+			);
+			path = SEBLEPrinter;
+			sourceTree = "<group>";
+		};
+		B9499D3B1CDB200000542039 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B9499D3C1CDB200000542039 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9499D521CDB201D00542039 /* BLEPrinter */ = {
+			isa = PBXGroup;
+			children = (
+				B9499D591CDB207C00542039 /* SEPrinterManager.h */,
+				B9499D5A1CDB207C00542039 /* SEPrinterManager.m */,
+				B9499D531CDB203500542039 /* HLPrinter.h */,
+				B9499D541CDB203500542039 /* HLPrinter.m */,
+				B9499D551CDB203500542039 /* UIImage+Bitmap.h */,
+				B9499D561CDB203500542039 /* UIImage+Bitmap.m */,
+				B9499D5E1CDB246B00542039 /* SEBLEConst.h */,
+			);
+			path = BLEPrinter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B9499D371CDB1FFF00542039 /* SEBLEPrinter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9499D4F1CDB200000542039 /* Build configuration list for PBXNativeTarget "SEBLEPrinter" */;
+			buildPhases = (
+				B9499D341CDB1FFF00542039 /* Sources */,
+				B9499D351CDB1FFF00542039 /* Frameworks */,
+				B9499D361CDB1FFF00542039 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SEBLEPrinter;
+			productName = SEBLEPrinter;
+			productReference = B9499D381CDB1FFF00542039 /* SEBLEPrinter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B9499D301CDB1FFF00542039 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Halley;
+				TargetAttributes = {
+					B9499D371CDB1FFF00542039 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = B9499D331CDB1FFF00542039 /* Build configuration list for PBXProject "SEBLEPrinter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B9499D2F1CDB1FFF00542039;
+			productRefGroup = B9499D391CDB1FFF00542039 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B9499D371CDB1FFF00542039 /* SEBLEPrinter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B9499D361CDB1FFF00542039 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9499D4B1CDB200000542039 /* LaunchScreen.storyboard in Resources */,
+				B9499D481CDB200000542039 /* Assets.xcassets in Resources */,
+				B9499D461CDB200000542039 /* Main.storyboard in Resources */,
+				B944635C1CDC2DC200FE661F /* SVProgressHUD.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B9499D341CDB1FFF00542039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9499D5B1CDB207C00542039 /* SEPrinterManager.m in Sources */,
+				B9499D431CDB200000542039 /* ViewController.m in Sources */,
+				B9499D401CDB200000542039 /* AppDelegate.m in Sources */,
+				B9499D581CDB203500542039 /* UIImage+Bitmap.m in Sources */,
+				B9499D571CDB203500542039 /* HLPrinter.m in Sources */,
+				B944635D1CDC2DC200FE661F /* SVProgressHUD.m in Sources */,
+				B944635A1CDC2DC200FE661F /* SVIndefiniteAnimatedView.m in Sources */,
+				B9499D3D1CDB200000542039 /* main.m in Sources */,
+				B944635B1CDC2DC200FE661F /* SVProgressAnimatedView.m in Sources */,
+				B944635E1CDC2DC200FE661F /* SVRadialGradientLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B9499D441CDB200000542039 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9499D451CDB200000542039 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B9499D491CDB200000542039 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9499D4A1CDB200000542039 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B9499D4D1CDB200000542039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B9499D4E1CDB200000542039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B9499D501CDB200000542039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SEBLEPrinter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.suneee.SEBLEPrinter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B9499D511CDB200000542039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SEBLEPrinter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.suneee.SEBLEPrinter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B9499D331CDB1FFF00542039 /* Build configuration list for PBXProject "SEBLEPrinter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9499D4D1CDB200000542039 /* Debug */,
+				B9499D4E1CDB200000542039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9499D4F1CDB200000542039 /* Build configuration list for PBXNativeTarget "SEBLEPrinter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9499D501CDB200000542039 /* Debug */,
+				B9499D511CDB200000542039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B9499D301CDB1FFF00542039 /* Project object */;
+}
