@@ -1,6 +1,8 @@
 # SEBLEPrinter
-iOS 蓝牙打印机库，侧重于打印部分，弱化蓝牙操作。
+iOS 蓝牙打印机库，侧重于打印部分，弱化蓝牙操作。<br>
+添加了预览的功能。
 # 效果图
+![预览](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/04.png)
 ![小票](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/printer.png)
 # 说明
 与上一个蓝牙和打印demo中不同。
