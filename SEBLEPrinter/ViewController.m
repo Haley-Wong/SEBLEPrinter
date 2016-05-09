@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "SEPreviewViewController.h"
+
 #import "SEPrinterManager.h"
 #import "SVProgressHUD.h"
 
@@ -28,8 +30,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.title = @"未连接";
-    _manager = [SEPrinterManager sharedInstance];
-    [_manager startScanPerpheralTimeout:10 Success:^(NSArray<CBPeripheral *> *perpherals) {
+    _manager = [SEPrinterManager sharedInstance]; // 这里本来不是单例，后来加的，所以下面还是当成实例变量在用
+    [_manager startScanPerpheralTimeout:10 Success:^(NSArray<CBPeripheral *> *perpherals,BOOL isTimeout) {
         NSLog(@"perpherals:%@",perpherals);
         _deviceArray = perpherals;
         [_tableView reloadData];
@@ -37,88 +39,108 @@
          NSLog(@"error:%ld",(long)error);
     }];
     
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"预览" style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-- (void)rightAction
+- (HLPrinter *)getPrinter
 {
+    HLPrinter *printer = [[HLPrinter alloc] initWithShowPreview:YES];
     NSString *title = @"测试电商";
     NSString *str1 = @"测试电商服务中心(销售单)";
+    [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+    [printer appendText:str1 alignment:HLTextAlignmentCenter];
+    [printer appendBarCodeWithInfo:@"RN3456789012"];
+    [printer appendSeperatorLine];
     
-    //方式一：
-//    HLPrinter *printer = [[HLPrinter alloc] init];
-//    [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-//    [printer appendText:str1 alignment:HLTextAlignmentCenter];
-//    [printer appendBarCodeWithInfo:@"RN3456789012"];
-//    [printer appendSeperatorLine];
-//    
-//    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-//    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-//    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-//    
-//    [printer appendSeperatorLine];
-//    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
-//    CGFloat total = 0.0;
-//    NSDictionary *dict1 = @{@"name":@"铅笔",@"amount":@"5",@"price":@"2.0"};
-//    NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
-//    NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
-//    NSArray *goodsArray = @[dict1, dict2, dict3];
-//    for (NSDictionary *dict in goodsArray) {
-//        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
-//        total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
-//    }
-//    
-//    [printer appendSeperatorLine];
-//    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
-//    [printer appendTitle:@"总计:" value:totalStr];
-//    [printer appendTitle:@"实收:" value:@"100.00"];
-//    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
-//    [printer appendTitle:@"找零:" value:leftStr];
-//    
-//    [printer appendFooter:nil];
-//    
-//    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
-//    
-//    NSData *mainData = [printer getFinalData];
-//    
-//    [_manager sendPrintData:mainData completion:nil];
+    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
     
-    //方式二：
-    [_manager prepareForPrinter];
-    [_manager appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-    [_manager appendText:str1 alignment:HLTextAlignmentCenter];
-//    [_manager appendBarCodeWithInfo:@"RN3456789012"];
-    [_manager appendSeperatorLine];
-    
-    [_manager appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-    [_manager appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-    [_manager appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-    
-    [_manager appendSeperatorLine];
-    [_manager appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
+    [printer appendSeperatorLine];
+    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
     CGFloat total = 0.0;
     NSDictionary *dict1 = @{@"name":@"铅笔",@"amount":@"5",@"price":@"2.0"};
     NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
     NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
     NSArray *goodsArray = @[dict1, dict2, dict3];
     for (NSDictionary *dict in goodsArray) {
-        [_manager appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
+        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
         total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
     }
     
-    [_manager appendSeperatorLine];
+    [printer appendSeperatorLine];
     NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
-    [_manager appendTitle:@"总计:" value:totalStr];
-    [_manager appendTitle:@"实收:" value:@"100.00"];
+    [printer appendTitle:@"总计:" value:totalStr];
+    [printer appendTitle:@"实收:" value:@"100.00"];
     NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
-    [_manager appendTitle:@"找零:" value:leftStr];
+    [printer appendTitle:@"找零:" value:leftStr];
     
-    [_manager appendFooter:nil];
+    [printer appendFooter:nil];
     
-//    [_manager appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    return printer;
+}
+
+- (void)leftAction
+{
+    HLPrinter *printer = [self getPrinter];
     
-    [_manager printWithResult:nil];
+    UIView *view = [printer getPreviewView];
+    
+    SEPreviewViewController *viewVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SEPreviewViewController"];
+    viewVC.previewView = view;
+    
+    [self.navigationController pushViewController:viewVC animated:YES];
+}
+
+- (void)rightAction
+{
+    //方式一：
+    HLPrinter *printer = [self getPrinter];
+    
+    NSData *mainData = [printer getFinalData];
+    
+    [_manager sendPrintData:mainData completion:nil];
+    
+    //方式二：
+//    [_manager prepareForPrinter];
+//    [_manager appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+//    [_manager appendText:str1 alignment:HLTextAlignmentCenter];
+////    [_manager appendBarCodeWithInfo:@"RN3456789012"];
+//    [_manager appendSeperatorLine];
+//    
+//    [_manager appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+//    [_manager appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+//    [_manager appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
+//    
+//    [_manager appendSeperatorLine];
+//    [_manager appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
+//    CGFloat total = 0.0;
+//    NSDictionary *dict1 = @{@"name":@"铅笔",@"amount":@"5",@"price":@"2.0"};
+//    NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
+//    NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
+//    NSArray *goodsArray = @[dict1, dict2, dict3];
+//    for (NSDictionary *dict in goodsArray) {
+//        [_manager appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
+//        total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
+//    }
+//    
+//    [_manager appendSeperatorLine];
+//    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
+//    [_manager appendTitle:@"总计:" value:totalStr];
+//    [_manager appendTitle:@"实收:" value:@"100.00"];
+//    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
+//    [_manager appendTitle:@"找零:" value:leftStr];
+//    
+//    [_manager appendFooter:nil];
+//    
+////    [_manager appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+//    
+//    [_manager printWithResult:nil];
 }
 
 #pragma mark - UITableViewDataSource

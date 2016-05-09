@@ -41,6 +41,8 @@ static SEPrinterManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[SEPrinterManager alloc] init];
+        
+        [instance resetBLEModel];
     });
     
     return instance;
@@ -79,6 +81,13 @@ static SEPrinterManager *instance = nil;
         if (_scanPerpheralFailure) {
             _scanPerpheralFailure(SEScanErrorTimeout);
         }
+    } else {
+        if (_delegate && [_delegate respondsToSelector:@selector(printerManager:perpherals:isTimeout:)]) {
+            [_delegate printerManager:self perpherals:_perpherals isTimeout:YES];
+        }
+        if (_scanPerpheralSuccess) {
+            _scanPerpheralSuccess(_perpherals,YES);
+        }
     }
 }
 
@@ -88,7 +97,7 @@ static SEPrinterManager *instance = nil;
         return NO;
     }
     
-    if (_connectedPerpheral.state != CBPeripheralStateConnected) {
+    if (_connectedPerpheral.state != CBPeripheralStateConnected && _connectedPerpheral.state != CBPeripheralStateConnecting) {
         return NO;
     }
     
@@ -146,9 +155,16 @@ static SEPrinterManager *instance = nil;
 
 - (void)cancelPeripheral:(CBPeripheral *)peripheral
 {
+    if (!peripheral) {
+        return;
+    }
     [_centralManager cancelPeripheralConnection:peripheral];
     _connectedPerpheral = nil;
     [_writeChatacters removeAllObjects];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"peripheral"];
+    [userDefaults synchronize];
 }
 
 - (void)autoConnectLastPeripheralTimeout:(NSTimeInterval)timeout completion:(SEConnectCompletion)completion
@@ -169,14 +185,14 @@ static SEPrinterManager *instance = nil;
 {
     if (!self.connectedPerpheral) {
         if (result) {
-            result(NO,@"未连接蓝牙设备");
+            result(_connectedPerpheral,NO,@"未连接蓝牙设备");
         }
         return;
     }
     
     if (self.writeChatacters.count == 0) {
         if (result) {
-           result(NO,@"该蓝牙设备不能写入数据");
+           result(_connectedPerpheral,NO,@"该蓝牙设备不能写入数据");
         }
         return;
     }
@@ -185,7 +201,7 @@ static SEPrinterManager *instance = nil;
     
     [_connectedPerpheral writeValue:data forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
     if (result) {
-        result(YES,@"已成功发送至蓝牙设备");
+        result(_connectedPerpheral,YES,@"已成功发送至蓝牙设备");
     }
 }
 
@@ -194,7 +210,7 @@ static SEPrinterManager *instance = nil;
     NSData *finalData = [_printer getFinalData];
     if (finalData.length == 0) {
         if (result) {
-            result(NO,@"打印数据格式出错");
+            result(_connectedPerpheral,NO,@"打印数据格式出错");
         }
         return;
     }
@@ -406,12 +422,12 @@ static SEPrinterManager *instance = nil;
         }
     }
     
-    if (_delegate && [_delegate respondsToSelector:@selector(printerManager:perpherals:)]) {
-        [_delegate printerManager:self perpherals:_perpherals];
+    if (_delegate && [_delegate respondsToSelector:@selector(printerManager:perpherals:isTimeout:)]) {
+        [_delegate printerManager:self perpherals:_perpherals isTimeout:NO];
     }
     
     if (_scanPerpheralSuccess) {
-        _scanPerpheralSuccess(_perpherals);
+        _scanPerpheralSuccess(_perpherals,NO);
     }
     
     if (_autoConnect) {

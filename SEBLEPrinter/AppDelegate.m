@@ -18,6 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    if (![[SEPrinterManager sharedInstance] isConnected]) {
+        [[SEPrinterManager sharedInstance] autoConnectLastPeripheralTimeout:10 completion:^(CBPeripheral *perpheral, NSError *error) {
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            NSLog(@"成功");
+        }];
+    }
+    
     return YES;
 }
 

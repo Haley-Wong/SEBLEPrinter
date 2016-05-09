@@ -18,7 +18,7 @@
 /** 返回扫描到的蓝牙 设备列表
  *  因为蓝牙模块一次返回一个设备，所以该方法会调用多次
  */
-- (void)printerManager:(SEPrinterManager *)manager perpherals:(NSArray<CBPeripheral *> *)perpherals;
+- (void)printerManager:(SEPrinterManager *)manager perpherals:(NSArray<CBPeripheral *> *)perpherals isTimeout:(BOOL)isTimeout;
 
 /** 扫描蓝牙设备失败
  *

@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, SEScanError) {
  *
  *  @param perpherals 蓝牙外设列表
  */
-typedef void(^SEScanPerpheralSuccess)(NSArray<CBPeripheral *> *perpherals);
+typedef void(^SEScanPerpheralSuccess)(NSArray<CBPeripheral *> *perpherals, BOOL isTimeout);
 
 /**
  *  扫描失败的block
@@ -53,7 +53,7 @@ typedef void(^SEDisconnect)(CBPeripheral *perpheral, NSError *error);
  *  @param completion 是否完成
  *  @param error      错误信息
  */
-typedef void(^SEPrintResult)(BOOL completion, NSString *error);
+typedef void(^SEPrintResult)(CBPeripheral *connectPerpheral, BOOL completion, NSString *error);
 
 
 #endif /* SEBLEConst_h */
