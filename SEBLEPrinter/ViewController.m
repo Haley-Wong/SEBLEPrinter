@@ -82,6 +82,12 @@
     [printer appendFooter:nil];
     
     [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    
+    // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
+    // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer
+    // 截取屏幕快照，可以用UIWebView+UIImage中的catogery方法 - (UIImage *)imageForWebView
+    
+    
     return printer;
 }
 

@@ -24,6 +24,7 @@
 		B9499D581CDB203500542039 /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D561CDB203500542039 /* UIImage+Bitmap.m */; };
 		B9499D5B1CDB207C00542039 /* SEPrinterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D5A1CDB207C00542039 /* SEPrinterManager.m */; };
 		B9499D5D1CDB20A600542039 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9499D5C1CDB20A600542039 /* CoreBluetooth.framework */; };
+		B966B3611CE5C2C600E03487 /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B966B3601CE5C2C600E03487 /* UIWebView+UIImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,8 @@
 		B9499D5A1CDB207C00542039 /* SEPrinterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPrinterManager.m; sourceTree = "<group>"; };
 		B9499D5C1CDB20A600542039 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B9499D5E1CDB246B00542039 /* SEBLEConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEBLEConst.h; sourceTree = "<group>"; };
+		B966B35F1CE5C2C600E03487 /* UIWebView+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UIImage.h"; sourceTree = "<group>"; };
+		B966B3601CE5C2C600E03487 /* UIWebView+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UIImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 				B9499D5A1CDB207C00542039 /* SEPrinterManager.m */,
 				B9499D531CDB203500542039 /* HLPrinter.h */,
 				B9499D541CDB203500542039 /* HLPrinter.m */,
+				B966B35F1CE5C2C600E03487 /* UIWebView+UIImage.h */,
+				B966B3601CE5C2C600E03487 /* UIWebView+UIImage.m */,
 				B9499D551CDB203500542039 /* UIImage+Bitmap.h */,
 				B9499D561CDB203500542039 /* UIImage+Bitmap.m */,
 				B9499D5E1CDB246B00542039 /* SEBLEConst.h */,
@@ -222,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9499D5B1CDB207C00542039 /* SEPrinterManager.m in Sources */,
+				B966B3611CE5C2C600E03487 /* UIWebView+UIImage.m in Sources */,
 				B9499D431CDB200000542039 /* ViewController.m in Sources */,
 				B94463611CDC609900FE661F /* SEPreviewViewController.m in Sources */,
 				B9499D401CDB200000542039 /* AppDelegate.m in Sources */,
