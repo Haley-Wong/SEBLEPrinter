@@ -19,8 +19,6 @@
 
 @property (strong, nonatomic)   NSArray              *deviceArray;  /**< 蓝牙设备个数 */
 
-@property (strong, nonatomic)   SEPrinterManager      *manager;  /**< 蓝牙打印机 */
-
 @end
 
 @implementation ViewController
@@ -30,7 +28,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.title = @"未连接";
-    _manager = [SEPrinterManager sharedInstance]; // 这里本来不是单例，后来加的，所以下面还是当成实例变量在用
+    SEPrinterManager *_manager = [SEPrinterManager sharedInstance]; // 这里本来不是单例，后来加的，所以下面还是当成实例变量在用
     [_manager startScanPerpheralTimeout:10 Success:^(NSArray<CBPeripheral *> *perpherals,BOOL isTimeout) {
         NSLog(@"perpherals:%@",perpherals);
         _deviceArray = perpherals;
@@ -53,7 +51,7 @@
     NSString *str1 = @"测试电商服务中心(销售单)";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
     [printer appendText:str1 alignment:HLTextAlignmentCenter];
-    [printer appendBarCodeWithInfo:@"RN3456789012"];
+//    [printer appendBarCodeWithInfo:@"RN3456789012"];
     [printer appendSeperatorLine];
     
     [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
@@ -63,9 +61,9 @@
     [printer appendSeperatorLine];
     [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
     CGFloat total = 0.0;
-    NSDictionary *dict1 = @{@"name":@"铅笔",@"amount":@"5",@"price":@"2.0"};
-    NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
-    NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
+    NSDictionary *dict1 = @{@"name":@"铅笔测试一下哈哈",@"amount":@"5",@"price":@"2.0"};
+    NSDictionary *dict2 = @{@"name":@"abcdefghijfdf",@"amount":@"1",@"price":@"1.0"};
+    NSDictionary *dict3 = @{@"name":@"abcde笔记本啊啊",@"amount":@"3",@"price":@"3.0"};
     NSArray *goodsArray = @[dict1, dict2, dict3];
     for (NSDictionary *dict in goodsArray) {
         [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
@@ -81,7 +79,7 @@
     
     [printer appendFooter:nil];
     
-    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+//    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
     
     // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
     // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer
@@ -109,8 +107,7 @@
     HLPrinter *printer = [self getPrinter];
     
     NSData *mainData = [printer getFinalData];
-    
-    [_manager sendPrintData:mainData completion:nil];
+    [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:nil];
     
     //方式二：
 //    [_manager prepareForPrinter];
@@ -174,7 +171,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CBPeripheral *peripheral = [self.deviceArray objectAtIndex:indexPath.row];
     
-    [_manager connectPeripheral:peripheral completion:^(CBPeripheral *perpheral, NSError *error) {
+    [[SEPrinterManager sharedInstance] connectPeripheral:peripheral completion:^(CBPeripheral *perpheral, NSError *error) {
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"连接失败"];
         } else {

@@ -436,6 +436,7 @@ static SEPrinterManager *instance = nil;
         
         if ([peripheral.identifier.UUIDString isEqualToString:UUIDString]) {
             [_centralManager connectPeripheral:peripheral options:nil];
+            peripheral.delegate = self;
             [peripheral discoverServices:nil];
         }
     } else {
