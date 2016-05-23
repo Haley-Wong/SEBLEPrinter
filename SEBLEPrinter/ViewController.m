@@ -179,6 +179,16 @@
             [SVProgressHUD showSuccessWithStatus:@"连接成功"];
         }
     }];
+    
+    // 如果你需要连接，立刻去打印
+//    [[SEPrinterManager sharedInstance] fullOptionPeripheral:peripheral completion:^(SEOptionStage stage, CBPeripheral *perpheral, NSError *error) {
+//        if (stage == SEOptionStageSeekCharacteristics) {
+//            HLPrinter *printer = [self getPrinter];
+//            
+//            NSData *mainData = [printer getFinalData];
+//            [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:nil];
+//        }
+//    }];
 }
 
 @end

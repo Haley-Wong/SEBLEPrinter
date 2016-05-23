@@ -104,6 +104,14 @@
 - (void)connectPeripheral:(CBPeripheral *)peripheral completion:(SEConnectCompletion)completion;
 
 /**
+ *  完整操作，包括连接、扫描服务、扫描特性、扫描描述
+ *
+ *  @param peripheral 要连接的蓝牙外设
+ *  @param completion 完成后的回调
+ */
+- (void)fullOptionPeripheral:(CBPeripheral *)peripheral completion:(SEFullOptionCompletion)completion;
+
+/**
  *  取消某个蓝牙外设的连接
  *
  *  @param peripheral 蓝牙外设

@@ -16,6 +16,8 @@
 @property (copy, nonatomic)   SEScanPerpheralSuccess             scanPerpheralSuccess;  /**< 扫描设备成功的回调 */
 @property (copy, nonatomic)   SEScanPerpheralFailure             scanPerpheralFailure;  /**< 扫描设备失败的回调 */
 @property (copy, nonatomic)   SEConnectCompletion                connectCompletion;    /**< 连接完成的回调 */
+@property (copy, nonatomic)   SEFullOptionCompletion             optionCompletion;    /**< 连接、扫描、搜索 */
+
 @property (copy, nonatomic)   SEDisconnect                       disconnectBlock;    /**< 断开连接的回调 */
 
 @property (strong, nonatomic)   CBCentralManager            *centralManager;        /**< 中心管理器 */
@@ -161,6 +163,12 @@ static SEPrinterManager *instance = nil;
 - (void)connectPeripheral:(CBPeripheral *)peripheral completion:(SEConnectCompletion)completion
 {
     _connectCompletion = completion;
+    [self connectPeripheral:peripheral];
+}
+
+- (void)fullOptionPeripheral:(CBPeripheral *)peripheral completion:(SEFullOptionCompletion)completion
+{
+    _optionCompletion = completion;
     [self connectPeripheral:peripheral];
 }
 
@@ -447,10 +455,7 @@ static SEPrinterManager *instance = nil;
         if ([peripheral.identifier.UUIDString isEqualToString:UUIDString]) {
             [_centralManager connectPeripheral:peripheral options:nil];
             peripheral.delegate = self;
-            [peripheral discoverServices:nil];
         }
-    } else {
-        [peripheral discoverServices:nil];
     }
 }
 
@@ -469,10 +474,15 @@ static SEPrinterManager *instance = nil;
         _connectCompletion(peripheral,nil);
     }
     
+    if (_optionCompletion) {
+        _optionCompletion(SEOptionStageConnection,peripheral,nil);
+    }
+    
     if (_delegate && [_delegate respondsToSelector:@selector(printerManager:completeConnectPerpheral:error:)]) {
         [_delegate printerManager:self completeConnectPerpheral:peripheral error:nil];
     }
     
+    peripheral.delegate = self;
     [peripheral discoverServices:nil];
 }
 
@@ -480,6 +490,10 @@ static SEPrinterManager *instance = nil;
 {
     if (_connectCompletion) {
         _connectCompletion(peripheral,error);
+    }
+    
+    if (_optionCompletion) {
+        _optionCompletion(SEOptionStageConnection, peripheral,error);
     }
     
     if (_delegate && [_delegate respondsToSelector:@selector(printerManager:completeConnectPerpheral:error:)]) {
@@ -505,11 +519,17 @@ static SEPrinterManager *instance = nil;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error
 {
     if (error) {
+        if (_optionCompletion) {
+            _optionCompletion(SEOptionStageSeekServices,peripheral,error);
+        }
         return;
     }
     
     for (CBService *service in peripheral.services) {
         [peripheral discoverCharacteristics:nil forService:service];
+    }
+    if (_optionCompletion) {
+        _optionCompletion(SEOptionStageSeekServices,peripheral,nil);
     }
 }
 
@@ -517,6 +537,13 @@ static SEPrinterManager *instance = nil;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(nullable NSError *)error
 {
     if (error) {
+        if ([service isEqual:peripheral.services.lastObject]) {
+            if (_writeChatacters.count > 0) {
+                _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+            } else {
+                _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,error);
+            }
+        }
         return;
     }
     
@@ -533,6 +560,9 @@ static SEPrinterManager *instance = nil;
         }
     }
     
+    if ([service isEqual:peripheral.services.lastObject]) {
+        _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+    }
 }
 
 
