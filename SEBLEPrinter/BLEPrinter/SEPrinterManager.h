@@ -56,6 +56,13 @@
 + (instancetype)sharedInstance;
 
 /**
+ *  上次连接的蓝牙外设的UUIDString
+ *
+ *  @return UUIDString,没有时返回nil
+ */
++ (NSString *)UUIDStringForLastPeripheral;
+
+/**
  *  蓝牙外设是否已连接
  *
  *  @return YES/NO

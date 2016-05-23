@@ -38,25 +38,36 @@ static SEPrinterManager *instance = nil;
 
 + (instancetype)sharedInstance
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[SEPrinterManager alloc] init];
-        
-        [instance resetBLEModel];
-    });
-    
-    return instance;
+    return [[self alloc] init];
+}
+
++ (NSString *)UUIDStringForLastPeripheral
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *UUIDString = [userDefaults objectForKey:@"peripheral"];
+    return UUIDString;
 }
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self) {
-        _perpherals = [[NSMutableArray alloc] init];
-        _writeChatacters = [[NSMutableArray alloc] init];
-        _timeout = 30;
-    }
-    return self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [super init];
+        instance.perpherals = [[NSMutableArray alloc] init];
+        instance.writeChatacters = [[NSMutableArray alloc] init];
+        instance.timeout = 30;
+    });
+    return instance;
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [super allocWithZone:zone];
+    });
+    
+    return instance;
 }
 
 #pragma mark - bluetooth method
@@ -431,8 +442,7 @@ static SEPrinterManager *instance = nil;
     }
     
     if (_autoConnect) {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *UUIDString = [userDefaults objectForKey:@"peripheral"];
+        NSString *UUIDString = [SEPrinterManager UUIDStringForLastPeripheral];
         
         if ([peripheral.identifier.UUIDString isEqualToString:UUIDString]) {
             [_centralManager connectPeripheral:peripheral options:nil];

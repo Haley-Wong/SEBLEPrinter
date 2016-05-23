@@ -54,11 +54,11 @@
 //    [printer appendBarCodeWithInfo:@"RN3456789012"];
     [printer appendSeperatorLine];
     
-    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-    
-    [printer appendSeperatorLine];
+//    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+//    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+//    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
+//    
+//    [printer appendSeperatorLine];
     [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
     CGFloat total = 0.0;
     NSDictionary *dict1 = @{@"name":@"铅笔测试一下哈哈",@"amount":@"5",@"price":@"2.0"};
