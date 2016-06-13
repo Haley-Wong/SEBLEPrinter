@@ -1,6 +1,7 @@
 # SEBLEPrinter
 iOS 蓝牙打印机库，侧重于打印部分，弱化蓝牙操作。<br>
 添加了预览的功能。
+部分蓝牙打印机，一次写入的数据过多会导致打印乱码，打印机脱机，所以需要将打印数据分多次打印。
 # 效果图
 ![预览](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/04.png)
 ![小票](https://github.com/Halley-Wong/HLBluetoothDemo/blob/master/HLBluetoothDemo/images/printer.png)
