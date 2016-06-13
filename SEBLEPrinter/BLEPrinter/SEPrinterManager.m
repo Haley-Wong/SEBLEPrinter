@@ -20,6 +20,8 @@
 
 @property (copy, nonatomic)   SEDisconnect                       disconnectBlock;    /**< 断开连接的回调 */
 
+@property (strong, nonatomic)   SEPrintResult                   printResult;  /**< 打印结果的回调 */
+
 @property (strong, nonatomic)   CBCentralManager            *centralManager;        /**< 中心管理器 */
 @property (strong, nonatomic)   CBPeripheral                *connectedPerpheral;    /**< 当前连接的外设 */
 @property (strong, nonatomic)   NSMutableArray              *perpherals;  /**< 搜索到的蓝牙设备列表 */
@@ -188,6 +190,8 @@ static SEPrinterManager *instance = nil;
 
 - (void)autoConnectLastPeripheralTimeout:(NSTimeInterval)timeout completion:(SEConnectCompletion)completion
 {
+    self.timeout = timeout;
+    
     _autoConnect = YES;
     
     _connectCompletion = completion;
@@ -216,12 +220,15 @@ static SEPrinterManager *instance = nil;
         return;
     }
     
-    NSDictionary *dict = [_writeChatacters firstObject];
+    _printResult = result;
+    
+    NSDictionary *dict = [_writeChatacters lastObject];
+    
+    if (data.length > 144) { // 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
+        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
+    }
     
     [_connectedPerpheral writeValue:data forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
-    if (result) {
-        result(_connectedPerpheral,YES,@"已成功发送至蓝牙设备");
-    }
 }
 
 - (void)printWithResult:(SEPrintResult)result
@@ -359,6 +366,17 @@ static SEPrinterManager *instance = nil;
 - (void)appendBarCodeWithInfo:(NSString *)info alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth
 {
     [_printer appendBarCodeWithInfo:info alignment:alignment maxWidth:maxWidth];
+}
+
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size
+{
+    [_printer appendQRCodeWithInfo:info size:size];
+
+}
+
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment
+{
+    [_printer appendQRCodeWithInfo:info size:size alignment:alignment];
 }
 
 /**
@@ -549,10 +567,11 @@ static SEPrinterManager *instance = nil;
     
     for (CBCharacteristic *character in service.characteristics) {
         CBCharacteristicProperties properties = character.properties;
-        if (properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            NSDictionary *dict = @{kSECharacter:character,kSEType:@(CBCharacteristicWriteWithoutResponse)};
-            [_writeChatacters addObject:dict];
-        }
+        //如果我们需要回调，则就不要使用没有返回的特性来写入数据
+//        if (properties & CBCharacteristicPropertyWriteWithoutResponse) {
+//            NSDictionary *dict = @{kSECharacter:character,kSEType:@(CBCharacteristicWriteWithoutResponse)};
+//            [_writeChatacters addObject:dict];
+//        }
         
         if (properties & CBCharacteristicPropertyWrite) {
             NSDictionary *dict = @{kSECharacter:character,kSEType:@(CBCharacteristicWriteWithResponse)};
@@ -561,7 +580,21 @@ static SEPrinterManager *instance = nil;
     }
     
     if ([service isEqual:peripheral.services.lastObject]) {
-        _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+        if (_optionCompletion) {
+            _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+        }
+    }
+}
+
+#pragma mark ---------------- 写入数据的回调 --------------------
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
+{
+    if (_printResult) {
+        if (error) {
+            _printResult(_connectedPerpheral,NO,@"发送失败");
+        } else {
+            _printResult(_connectedPerpheral,YES,@"已成功发送至蓝牙设备");
+        } 
     }
 }
 

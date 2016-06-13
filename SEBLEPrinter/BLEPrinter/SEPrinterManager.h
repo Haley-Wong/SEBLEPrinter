@@ -51,6 +51,8 @@
 /**< 蓝牙操作代理 */
 @property (assign, nonatomic)   id<SEPrinterManagerDelegate>             delegate;
 
+@property (strong, nonatomic, readonly)   CBPeripheral                *connectedPerpheral;    /**< 当前连接的外设 */
+
 #pragma mark - bluetooth method
 
 + (instancetype)sharedInstance;
@@ -237,6 +239,25 @@
  *  @param maxWidth  图片最大宽度
  */
 - (void)appendBarCodeWithInfo:(NSString *)info alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth;
+
+/**
+ *  添加二维码
+ *  ✅推荐：这种方式使用的是打印机的指令生成二维码并打印机，所以比较推荐这种方式
+ *
+ *  @param info 二维码中的信息
+ *  @param size 二维码的大小 取值范围1 <= size <= 16
+ */
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size;
+
+/**
+ *  添加二维码
+ *  ✅推荐：这种方式使用的是打印机的指令生成二维码并打印机，所以比较推荐这种方式
+ *
+ *  @param info      二维码中的信息
+ *  @param size      二维码大小，取值范围 1 <= size <= 16
+ *  @param alignment 设置图片对齐方式
+ */
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment;
 
 /**
  *  添加二维码图片

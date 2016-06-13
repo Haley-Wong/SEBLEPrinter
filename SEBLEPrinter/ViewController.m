@@ -51,14 +51,14 @@
     NSString *str1 = @"测试电商服务中心(销售单)";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
     [printer appendText:str1 alignment:HLTextAlignmentCenter];
-//    [printer appendBarCodeWithInfo:@"RN3456789012"];
+    [printer appendBarCodeWithInfo:@"RN3456789012"];
     [printer appendSeperatorLine];
     
-//    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
-//    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
-//    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
-//    
-//    [printer appendSeperatorLine];
+    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
+    
+    [printer appendSeperatorLine];
     [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
     CGFloat total = 0.0;
     NSDictionary *dict1 = @{@"name":@"铅笔测试一下哈哈",@"amount":@"5",@"price":@"2.0"};
@@ -89,6 +89,79 @@
     return printer;
 }
 
+- (NSArray *)printDataArray
+{
+    NSMutableArray *printInfoArray = [NSMutableArray array];
+    
+    // 你可以多行数据一起写进蓝牙，但是不要过长，否则可能会导致乱码
+    HLPrinter *printer = [[HLPrinter alloc] init];
+    NSString *title = @"测试电商";
+    [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+    NSString *str1 = @"测试电商服务中心(销售单)";
+    [printer appendText:str1 alignment:HLTextAlignmentCenter];
+    [printer appendSeperatorLine];
+    NSData *data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    // 1.多行数组组合后打印
+    printer = [[HLPrinter alloc] init];
+    [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
+    [printer appendTitle:@"订单:" value:@"4000020160427100150" valueOffset:150];
+    [printer appendText:@"地址:深圳市南山区学府路东深大店" alignment:HLTextAlignmentLeft];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    // 2.单行数据打印
+    printer = [[HLPrinter alloc] init];
+    [printer appendSeperatorLine];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    printer = [[HLPrinter alloc] init];
+    [printer appendLeftText:@"商品" middleText:@"数量" rightText:@"单价" isTitle:YES];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    CGFloat total = 0.0;
+    NSDictionary *dict1 = @{@"name":@"铅笔测试一下哈哈",@"amount":@"5",@"price":@"2.0"};
+    NSDictionary *dict2 = @{@"name":@"abcdefghijfdf",@"amount":@"1",@"price":@"1.0"};
+    NSDictionary *dict3 = @{@"name":@"abcde笔记本啊啊",@"amount":@"3",@"price":@"3.0"};
+    NSArray *goodsArray = @[dict1, dict2, dict3];
+    for (NSDictionary *dict in goodsArray) {
+        printer = [[HLPrinter alloc] init];
+        [printer appendLeftText:dict[@"name"] middleText:dict[@"amount"] rightText:dict[@"price"] isTitle:NO];
+        data1 = [printer getFinalData];
+        [printInfoArray addObject:data1];
+        
+        total += [dict[@"price"] floatValue] * [dict[@"amount"] intValue];
+    }
+
+    printer = [[HLPrinter alloc] init];
+    [printer appendSeperatorLine];
+
+    NSString *totalStr = [NSString stringWithFormat:@"%.2f",total];
+    [printer appendTitle:@"总计:" value:totalStr];
+    [printer appendTitle:@"实收:" value:@"100.00"];
+    NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
+    [printer appendTitle:@"找零:" value:leftStr];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+
+    // 打印尾部
+    printer = [[HLPrinter alloc] init];
+    [printer appendFooter:nil];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+
+    // 打印条形码
+    printer = [[HLPrinter alloc] init];
+    [printer appendQRCodeWithInfo:@"www.baidu.com" size:12];
+    data1 = [printer getFinalData];
+    [printInfoArray addObject:data1];
+    
+    return printInfoArray;
+}
+
 - (void)leftAction
 {
     HLPrinter *printer = [self getPrinter];
@@ -104,10 +177,10 @@
 - (void)rightAction
 {
     //方式一：
-    HLPrinter *printer = [self getPrinter];
-    
-    NSData *mainData = [printer getFinalData];
-    [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:nil];
+//    HLPrinter *printer = [self getPrinter];
+//    
+//    NSData *mainData = [printer getFinalData];
+//    [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:nil];
     
     //方式二：
 //    [_manager prepareForPrinter];
@@ -144,6 +217,16 @@
 ////    [_manager appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
 //    
 //    [_manager printWithResult:nil];
+    
+#warning 如果你用方式一和方式二打印出现乱码，说明打印机不支持大数据打印，需要分开来打印
+    NSArray *printArray = [self printDataArray];
+    for (NSData *printData in printArray) {
+        [[SEPrinterManager sharedInstance] sendPrintData:printData completion:^(CBPeripheral *connectPerpheral, BOOL completion, NSString *error) {
+            if (!error) {
+                NSLog(@"写入成功");
+            }
+        }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
