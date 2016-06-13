@@ -42,7 +42,15 @@ static SEPrinterManager *instance = nil;
 
 + (instancetype)sharedInstance
 {
-    return [[self alloc] init];
+//    return [[self alloc] init];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[SEPrinterManager alloc] init];
+        
+        [instance resetBLEModel];
+    });
+    
+    return instance;
 }
 
 + (NSString *)UUIDStringForLastPeripheral
@@ -54,14 +62,21 @@ static SEPrinterManager *instance = nil;
 
 - (instancetype)init
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [super init];
-        instance.perpherals = [[NSMutableArray alloc] init];
-        instance.writeChatacters = [[NSMutableArray alloc] init];
-        instance.timeout = 30;
-    });
-    return instance;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        instance = [super init];
+//        instance.perpherals = [[NSMutableArray alloc] init];
+//        instance.writeChatacters = [[NSMutableArray alloc] init];
+//        instance.timeout = 30;
+//    });
+//    return instance;
+    self = [super init];
+    if (self) {
+        _perpherals = [[NSMutableArray alloc] init];
+        _writeChatacters = [[NSMutableArray alloc] init];
+        _timeout = 30;
+    }
+    return self;
 }
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone
