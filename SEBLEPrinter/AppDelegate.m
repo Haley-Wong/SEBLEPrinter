@@ -43,14 +43,14 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    if (![[SEPrinterManager sharedInstance] isConnected]) {
-        [[SEPrinterManager sharedInstance] autoConnectLastPeripheralTimeout:10 completion:^(CBPeripheral *perpheral, NSError *error) {
-            if (error) {
-                NSLog(@"%@",error);
-            }
-            NSLog(@"成功");
-        }];
-    }
+//    if (![[SEPrinterManager sharedInstance] isConnected]) {
+//        [[SEPrinterManager sharedInstance] autoConnectLastPeripheralTimeout:10 completion:^(CBPeripheral *perpheral, NSError *error) {
+//            if (error) {
+//                NSLog(@"%@",error);
+//            }
+//            NSLog(@"成功");
+//        }];
+//    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

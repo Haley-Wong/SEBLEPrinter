@@ -60,6 +60,7 @@ static SEPrinterManager *instance = nil;
         instance.perpherals = [[NSMutableArray alloc] init];
         instance.writeChatacters = [[NSMutableArray alloc] init];
         instance.timeout = 30;
+        [instance resetBLEModel];
     });
     return instance;
 }
