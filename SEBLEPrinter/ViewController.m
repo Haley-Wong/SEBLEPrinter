@@ -79,7 +79,9 @@
     
     [printer appendFooter:nil];
     
-//    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    [printer appendQRCodeWithInfo:@"www.baidu.com"];
+    
+    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
     
     // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
     // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer
@@ -177,10 +179,12 @@
 - (void)rightAction
 {
     //方式一：
-//    HLPrinter *printer = [self getPrinter];
-//    
-//    NSData *mainData = [printer getFinalData];
-//    [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:nil];
+    HLPrinter *printer = [self getPrinter];
+    
+    NSData *mainData = [printer getFinalData];
+    [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:^(CBPeripheral *connectPerpheral, BOOL completion, NSString *error) {
+        NSLog(@"写入数据返回结果啦");
+    }];
     
     //方式二：
 //    [_manager prepareForPrinter];
@@ -218,15 +222,15 @@
 //    
 //    [_manager printWithResult:nil];
     
-#warning 如果你用方式一和方式二打印出现乱码，说明打印机不支持大数据打印，需要分开来打印
-    NSArray *printArray = [self printDataArray];
-    for (NSData *printData in printArray) {
-        [[SEPrinterManager sharedInstance] sendPrintData:printData completion:^(CBPeripheral *connectPerpheral, BOOL completion, NSString *error) {
-            if (!error) {
-                NSLog(@"写入成功");
-            }
-        }];
-    }
+    // 方式三，你也可以分多次打印
+//    NSArray *printArray = [self printDataArray];
+//    for (NSData *printData in printArray) {
+//        [[SEPrinterManager sharedInstance] sendPrintData:printData completion:^(CBPeripheral *connectPerpheral, BOOL completion, NSString *error) {
+//            if (!error) {
+//                NSLog(@"写入成功");
+//            }
+//        }];
+//    }
 }
 
 #pragma mark - UITableViewDataSource

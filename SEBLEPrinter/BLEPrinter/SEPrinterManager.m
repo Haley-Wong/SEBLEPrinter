@@ -34,6 +34,9 @@
 
 @property (assign, nonatomic)   BOOL             autoConnect;  /**< 自动连接上次的外设 */
 
+@property (assign, nonatomic)   NSInteger         writeCount;   /**< 写入次数 */
+@property (assign, nonatomic)   NSInteger         responseCount; /**< 返回次数 */
+
 @end
 
 static SEPrinterManager *instance = nil;
@@ -221,15 +224,30 @@ static SEPrinterManager *instance = nil;
         return;
     }
     
-    _printResult = result;
-    
     NSDictionary *dict = [_writeChatacters lastObject];
     
-    if (data.length > 144) { // 这个144 ,是我用佳博乱码的那个型号测试的，可能别的型号或者别的品牌长度不一样
-        NSLog(@"警告:长度为%lu, 写入的数据过长，可能会导致打印乱码，打印机脱机",data.length);
-    }
+//    [_connectedPerpheral writeValue:leftData forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
     
-    [_connectedPerpheral writeValue:data forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
+    _writeCount = 0;
+    _responseCount = 0;
+    if (data.length <= 146) {
+        _printResult = result;
+        [_connectedPerpheral writeValue:data forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
+        _writeCount ++;
+    } else {
+        NSInteger index = 0;
+        for (index = 0; index < data.length - 146; index += 146) {
+            NSData *subData = [data subdataWithRange:NSMakeRange(index, 146)];
+            [_connectedPerpheral writeValue:subData forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
+            _writeCount++;
+        }
+        _printResult = result;
+        NSData *leftData = [data subdataWithRange:NSMakeRange(index, data.length - index)];
+        if (leftData) {
+            [_connectedPerpheral writeValue:leftData forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
+            _writeCount++;
+        }
+    }
 }
 
 - (void)printWithResult:(SEPrintResult)result
@@ -590,12 +608,18 @@ static SEPrinterManager *instance = nil;
 #pragma mark ---------------- 写入数据的回调 --------------------
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(nullable NSError *)error
 {
-    if (_printResult) {
-        if (error) {
-            _printResult(_connectedPerpheral,NO,@"发送失败");
-        } else {
-            _printResult(_connectedPerpheral,YES,@"已成功发送至蓝牙设备");
-        } 
+    if (!_printResult) {
+        return;
+    }
+    _responseCount ++;
+    if (_writeCount != _responseCount) {
+        return;
+    }
+    
+    if (error) {
+        _printResult(_connectedPerpheral,NO,@"发送失败");
+    } else {
+        _printResult(_connectedPerpheral,YES,@"已成功发送至蓝牙设备");
     }
 }
 

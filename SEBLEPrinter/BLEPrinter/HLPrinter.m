@@ -484,7 +484,6 @@
     
     // 2.设置图片
     UIImage *newImage = [image imageWithscaleMaxWidth:maxWidth];
-    newImage = [newImage blackAndWhiteImage];
     
     NSData *imageData = [newImage bitmapData];
     [_printerData appendData:imageData];

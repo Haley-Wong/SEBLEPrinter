@@ -246,7 +246,7 @@
     [colorFilter setDefaults];
     [colorFilter setValue:qrImage forKey:kCIInputImageKey];
     [colorFilter setValue:[CIColor colorWithRed:0 green:0 blue:0] forKey:@"inputColor0"];
-    [colorFilter setValue:[CIColor colorWithRed:0.3 green:0.8 blue:0.2] forKey:@"inputColor1"];
+    [colorFilter setValue:[CIColor colorWithRed:1 green:1 blue:1] forKey:@"inputColor1"];
     CIImage *colorImage = colorFilter.outputImage;
     //返回二维码
     CGFloat scale = width/31;
