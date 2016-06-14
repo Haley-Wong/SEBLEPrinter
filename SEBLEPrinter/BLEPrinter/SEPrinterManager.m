@@ -226,8 +226,6 @@ static SEPrinterManager *instance = nil;
     
     NSDictionary *dict = [_writeChatacters lastObject];
     
-//    [_connectedPerpheral writeValue:leftData forCharacteristic:dict[kSECharacter] type:[dict[kSEType] integerValue]];
-    
     _writeCount = 0;
     _responseCount = 0;
     if (data.length <= 146) {

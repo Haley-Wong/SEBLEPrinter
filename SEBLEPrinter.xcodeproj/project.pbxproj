@@ -12,7 +12,6 @@
 		B944635C1CDC2DC200FE661F /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B94463551CDC2DC200FE661F /* SVProgressHUD.bundle */; };
 		B944635D1CDC2DC200FE661F /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463571CDC2DC200FE661F /* SVProgressHUD.m */; };
 		B944635E1CDC2DC200FE661F /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463591CDC2DC200FE661F /* SVRadialGradientLayer.m */; };
-		B94463611CDC609900FE661F /* SEPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94463601CDC609900FE661F /* SEPreviewViewController.m */; };
 		B944636C1CDC92A600FE661F /* ico180.png in Resources */ = {isa = PBXBuildFile; fileRef = B944636B1CDC92A600FE661F /* ico180.png */; };
 		B9499D3D1CDB200000542039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D3C1CDB200000542039 /* main.m */; };
 		B9499D401CDB200000542039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9499D3F1CDB200000542039 /* AppDelegate.m */; };
@@ -38,8 +37,6 @@
 		B94463571CDC2DC200FE661F /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B94463581CDC2DC200FE661F /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		B94463591CDC2DC200FE661F /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		B944635F1CDC609900FE661F /* SEPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEPreviewViewController.h; sourceTree = "<group>"; };
-		B94463601CDC609900FE661F /* SEPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEPreviewViewController.m; sourceTree = "<group>"; };
 		B944636B1CDC92A600FE661F /* ico180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico180.png; sourceTree = "<group>"; };
 		B9499D381CDB1FFF00542039 /* SEBLEPrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SEBLEPrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9499D3C1CDB200000542039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,8 +114,6 @@
 				B9499D3E1CDB200000542039 /* AppDelegate.h */,
 				B9499D3F1CDB200000542039 /* AppDelegate.m */,
 				B944636B1CDC92A600FE661F /* ico180.png */,
-				B944635F1CDC609900FE661F /* SEPreviewViewController.h */,
-				B94463601CDC609900FE661F /* SEPreviewViewController.m */,
 				B9499D411CDB200000542039 /* ViewController.h */,
 				B9499D421CDB200000542039 /* ViewController.m */,
 				B9499D441CDB200000542039 /* Main.storyboard */,
@@ -229,7 +224,6 @@
 				B9499D5B1CDB207C00542039 /* SEPrinterManager.m in Sources */,
 				B966B3611CE5C2C600E03487 /* UIWebView+UIImage.m in Sources */,
 				B9499D431CDB200000542039 /* ViewController.m in Sources */,
-				B94463611CDC609900FE661F /* SEPreviewViewController.m in Sources */,
 				B9499D401CDB200000542039 /* AppDelegate.m in Sources */,
 				B9499D581CDB203500542039 /* UIImage+Bitmap.m in Sources */,
 				B9499D571CDB203500542039 /* HLPrinter.m in Sources */,
