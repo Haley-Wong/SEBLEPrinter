@@ -241,16 +241,8 @@
     [qrFilter setValue:strData forKey:@"inputMessage"];
     [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
     CIImage *qrImage = qrFilter.outputImage;
-    //颜色滤镜
-    CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"];
-    [colorFilter setDefaults];
-    [colorFilter setValue:qrImage forKey:kCIInputImageKey];
-    [colorFilter setValue:[CIColor colorWithRed:0 green:0 blue:0] forKey:@"inputColor0"];
-    [colorFilter setValue:[CIColor colorWithRed:1 green:1 blue:1] forKey:@"inputColor1"];
-    CIImage *colorImage = colorFilter.outputImage;
-    //返回二维码
-    CGFloat scale = width/31;
-    UIImage *codeImage = [UIImage imageWithCIImage:[colorImage imageByApplyingTransform:CGAffineTransformMakeScale(scale, scale)]];
+
+    UIImage *codeImage = [UIImage createNonInterpolatedUIImageFormCIImage:qrImage withSize:width];
     
     //二维码rect
     CGRect rect = CGRectMake(0, 0, codeImage.size.width, codeImage.size.height);

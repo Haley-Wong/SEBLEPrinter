@@ -46,7 +46,7 @@
     NSString *str1 = @"测试电商服务中心(销售单)";
     [printer appendText:title alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
     [printer appendText:str1 alignment:HLTextAlignmentCenter];
-//    [printer appendBarCodeWithInfo:@"RN3456789012"];
+    [printer appendBarCodeWithInfo:@"RN3456789012"];
     [printer appendSeperatorLine];
     
     [printer appendTitle:@"时间:" value:@"2016-04-27 10:01:50" valueOffset:150];
@@ -72,12 +72,13 @@
     NSString *leftStr = [NSString stringWithFormat:@"%.2f",100.00 - total];
     [printer appendTitle:@"找零:" value:leftStr];
     
-    [printer appendFooter:nil];
+    [printer appendSeperatorLine];
     
-//    [printer appendQRCodeWithInfo:@"www.baidu.com"];
-    [printer appendQRCodeWithInfo:@"www.baidu.com" size:10];
-//    
-//    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
+    [printer appendQRCodeWithInfo:@"www.baidu.com"];
+//    [printer appendQRCodeWithInfo:@"www.baidu.com" size:10];
+
+    [printer appendFooter:nil];
+    [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
     
     // 你也可以利用UIWebView加载HTML小票的方式，这样可以在远程修改小票的样式和布局。
     // 注意点：需要等UIWebView加载完成后，再截取UIWebView的屏幕快照，然后利用添加图片的方法，加进printer

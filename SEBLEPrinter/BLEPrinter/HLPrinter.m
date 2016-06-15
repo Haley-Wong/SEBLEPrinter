@@ -374,13 +374,13 @@
 
 - (void)appendQRCodeWithInfo:(NSString *)info
 {
-    [self appendQRCodeWithInfo:info centerImage:nil alignment:HLTextAlignmentCenter maxWidth:300];
+    [self appendQRCodeWithInfo:info centerImage:nil alignment:HLTextAlignmentCenter maxWidth:250];
 }
 
 - (void)appendQRCodeWithInfo:(NSString *)info centerImage:(UIImage *)centerImage alignment:(HLTextAlignment)alignment maxWidth:(CGFloat )maxWidth
 {
     UIImage *QRImage = [UIImage qrCodeImageWithInfo:info centerImage:centerImage width:maxWidth];
-    [self appendImage:QRImage alignment:alignment maxWidth:300];
+    [self appendImage:QRImage alignment:alignment maxWidth:maxWidth];
 }
 
 #pragma mark 其他
