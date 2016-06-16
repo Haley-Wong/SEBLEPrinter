@@ -74,8 +74,12 @@
     
     [printer appendSeperatorLine];
     
+    [printer appendText:@"位图方式二维码" alignment:HLTextAlignmentCenter];
     [printer appendQRCodeWithInfo:@"www.baidu.com"];
-//    [printer appendQRCodeWithInfo:@"www.baidu.com" size:10];
+    
+    [printer appendSeperatorLine];
+    [printer appendText:@"指令方式二维码" alignment:HLTextAlignmentCenter];
+    [printer appendQRCodeWithInfo:@"www.baidu.com" size:10];
 
     [printer appendFooter:nil];
     [printer appendImage:[UIImage imageNamed:@"ico180"] alignment:HLTextAlignmentCenter maxWidth:300];
