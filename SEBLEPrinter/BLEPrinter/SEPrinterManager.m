@@ -574,9 +574,13 @@ static SEPrinterManager *instance = nil;
     if (error) {
         if ([service isEqual:peripheral.services.lastObject]) {
             if (_writeChatacters.count > 0) {
-                _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+                if (_optionCompletion) {
+                    _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,nil);
+                }
             } else {
-                _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,error);
+                if (_optionCompletion) {
+                    _optionCompletion(SEOptionStageSeekCharacteristics,peripheral,error);
+                }
             }
         }
         return;
