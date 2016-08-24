@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.title = @"未连接";
-    SEPrinterManager *_manager = [SEPrinterManager sharedInstance]; // 这里本来不是单例，后来加的，所以下面还是当成实例变量在用
+    SEPrinterManager *_manager = [SEPrinterManager sharedInstance];
     [_manager startScanPerpheralTimeout:10 Success:^(NSArray<CBPeripheral *> *perpherals,BOOL isTimeout) {
         NSLog(@"perpherals:%@",perpherals);
         _deviceArray = perpherals;
@@ -37,6 +37,21 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    if ([SEPrinterManager sharedInstance].connectedPerpheral) {
+//        self.title = [SEPrinterManager sharedInstance].connectedPerpheral.name;
+//    } else {
+//        [[SEPrinterManager sharedInstance] autoConnectLastPeripheralTimeout:10 completion:^(CBPeripheral *perpheral, NSError *error) {
+//            NSLog(@"自动重连返回");
+//            self.title = [SEPrinterManager sharedInstance].connectedPerpheral.name;
+            // 因为自动重连后，特性还没扫描完，所以延迟一会开始写入数据
+//            [self performSelector:@selector(rightAction) withObject:nil afterDelay:1.0];
+//        }];
+//    }
 }
 
 - (HLPrinter *)getPrinter
@@ -98,7 +113,7 @@
     
     NSData *mainData = [printer getFinalData];
     [[SEPrinterManager sharedInstance] sendPrintData:mainData completion:^(CBPeripheral *connectPerpheral, BOOL completion, NSString *error) {
-        NSLog(@"写入数据返回结果啦");
+        NSLog(@"写入结：%d---错误:%@",completion,error);
     }];
     
     //方式二：
