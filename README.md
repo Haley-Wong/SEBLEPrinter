@@ -1,5 +1,7 @@
 # SEBLEPrinter
 iOS 蓝牙打印机库，侧重于打印部分，弱化蓝牙操作。<br>
+使用佳博 Gp-58MBIII和GP58MBIII和芯烨 XPrinter某型号测试通过。<br>
+另一个更灵活的演示工程：[HLBluetoothDemo](https://github.com/Haley-Wong/HLBluetoothDemo)
 # 更新
 修复打印乱码，导致打印机脱机再次打印没有反应的重大Bug。(2016-06-14) <br>
 删除了鸡肋的预览效果图。<br>
